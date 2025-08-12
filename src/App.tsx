@@ -8,6 +8,7 @@ import AuthLayout from "./Components/AuthLayout/AuthLayout";
 import Login from "./Components/Login/Login";
 import UsersList from "./Components/UsersList/UsersList";
 import AddUser from "./Components/AddUser/AddUser";
+import { ToastContainer } from "react-toastify";
 function App() {
   const routes = createBrowserRouter([
     {
@@ -56,6 +57,7 @@ function App() {
 
   return (
     <>
+      <ToastContainer />
       <RouterProvider router={routes}></RouterProvider>
     </>
   );

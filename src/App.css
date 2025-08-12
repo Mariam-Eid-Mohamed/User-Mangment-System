@@ -7,7 +7,9 @@
 }
 .title-with-bar {
   position: relative;
-  margin: 0; /* remove default margins */
+  margin: 10px auto;
+  width: fit-content;
+  padding-left: 12px; /* space between bar and text */
 }
 
 .title-with-bar::before {
