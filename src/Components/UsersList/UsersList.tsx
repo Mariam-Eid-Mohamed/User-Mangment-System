@@ -7,6 +7,7 @@ import { MdDeleteOutline } from "react-icons/md";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 interface User {
   id: number;
   image: string;
@@ -49,19 +50,24 @@ export default function UsersList() {
   const [show, setShow] = useState(false);
   const [userData, setuserData] = useState<User | null>();
   const [userId, setuserId] = useState<number | null>(null);
-
+  const navigate = useNavigate();
   const handleClose = () => setShow(false);
   const handleShow = (user: User) => {
     setuserId(user?.id);
     setuserData(user);
     setShow(true);
   };
+  const moveToAddUser = () => {
+    navigate("/dashboard/add-user");
+  };
 
   return (
     <>
       <div className="d-flex justify-content-between mx-4">
         <h3>Users List</h3>
-        <button className="btn btn-warning text-white">Add New User</button>
+        <button onClick={moveToAddUser} className="btn btn-warning text-white">
+          Add New User
+        </button>
       </div>
       <hr />
 
