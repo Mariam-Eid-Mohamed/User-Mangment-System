@@ -4,7 +4,9 @@ import axios from "axios";
 import Table from "react-bootstrap/Table";
 import { CiEdit } from "react-icons/ci";
 import { MdDeleteOutline } from "react-icons/md";
-
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
+import { toast } from "react-toastify";
 interface User {
   id: number;
   image: string;
@@ -26,9 +28,35 @@ export default function UsersList() {
       console.log(error);
     }
   };
+
+  const deleteUser = async () => {
+    try {
+      await axios.delete(`https://dummyjson.com/users/${userId}`);
+      //to close the modal after i press delete
+      handleClose();
+      toast.success("deleted successfully");
+      //rerender data after deletion
+      getusers();
+    } catch (error) {
+      console.log(error);
+      toast.error("Failed to  delete !");
+    }
+  };
   useEffect(() => {
     getusers();
   }, []);
+  //modal
+  const [show, setShow] = useState(false);
+  const [userData, setuserData] = useState<User | null>();
+  const [userId, setuserId] = useState<number | null>(null);
+
+  const handleClose = () => setShow(false);
+  const handleShow = (user: User) => {
+    setuserId(user?.id);
+    setuserData(user);
+    setShow(true);
+  };
+
   return (
     <>
       <div className="d-flex justify-content-between mx-4">
@@ -64,12 +92,32 @@ export default function UsersList() {
               <td>{user?.birthDate}</td>
               <td>
                 <CiEdit size={30} className="text-warning me-3" />
-                <MdDeleteOutline size={25} className="text-danger" />
+                <MdDeleteOutline
+                  onClick={() => handleShow(user)}
+                  size={25}
+                  className="text-danger"
+                />
               </td>
             </tr>
           ))}
         </tbody>
       </Table>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Deletion</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to delete {userData?.firstName}?
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={deleteUser}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }
