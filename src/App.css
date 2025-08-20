@@ -24,3 +24,6 @@
 .sidebarContainer {
   background-color: bisque;
 }
+.sidebarContainer .ps-sidebar-container .ps-menu-button :hover {
+  background-color: rgb(82, 56, 24);
+}
