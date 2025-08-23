@@ -97,7 +97,13 @@ export default function UsersList() {
               <td>{user?.phone}</td>
               <td>{user?.birthDate}</td>
               <td>
-                <CiEdit size={30} className="text-warning me-3" />
+                <CiEdit
+                  size={30}
+                  className="text-warning me-3"
+                  onClick={() =>
+                    navigate("/dashboard/update-user", { state: { user } })
+                  }
+                />
                 <MdDeleteOutline
                   onClick={() => handleShow(user)}
                   size={25}

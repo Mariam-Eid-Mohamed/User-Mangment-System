@@ -9,6 +9,7 @@ import Login from "./Components/Login/Login";
 import UsersList from "./Components/UsersList/UsersList";
 import AddUser from "./Components/AddUser/AddUser";
 import { ToastContainer } from "react-toastify";
+import UpdateUser from "./Components/UpdateUser/UpdateUser";
 function App() {
   const routes = createBrowserRouter([
     {
@@ -50,6 +51,10 @@ function App() {
         {
           path: "add-user",
           element: <AddUser />,
+        },
+        {
+          path: "update-user",
+          element: <UpdateUser />,
         },
       ],
     },
