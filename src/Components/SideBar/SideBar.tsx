@@ -9,9 +9,11 @@ import { IoHomeOutline } from "react-icons/io5";
 import { LuUsers } from "react-icons/lu";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../Context/AuthContext";
 
 export default function SideBar() {
+  const { userData }: any = useContext(AuthContext);
   const [collapsed, setCollapsed] = useState(false);
   const toggleCollapse = () => {
     setCollapsed(!collapsed);
@@ -40,8 +42,12 @@ export default function SideBar() {
         )}
 
         <div className="text-center my-3">
-          <img src="" className="rounded-circle w-75" alt="profile img" />
-          <h5>Mariam</h5>
+          <img
+            src={userData?.image}
+            className="rounded-circle w-75"
+            alt="profile img"
+          />
+          <h5>{userData?.firstName}</h5>
           <h6 className="text-warning">Admin</h6>
         </div>
         <Menu>

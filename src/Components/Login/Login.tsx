@@ -1,9 +1,15 @@
 import axios from "axios";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { AuthContext } from "../Context/AuthContext";
 
 export default function Login() {
+  interface AuthContextType {
+    saveUserData: () => void;
+  }
+  const { saveUserData } = useContext(AuthContext) as AuthContextType;
   const navigate = useNavigate();
   const {
     register,
@@ -21,7 +27,8 @@ export default function Login() {
         "https://dummyjson.com/auth/login",
         data
       );
-      console.log(response);
+      localStorage.setItem("userToken", response?.data?.accessToken);
+      saveUserData();
       toast.success("Logged succesfully");
       navigate("/dashboard");
     } catch (error) {
