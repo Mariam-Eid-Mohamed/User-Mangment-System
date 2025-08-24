@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 
 export interface User {
@@ -29,6 +30,7 @@ export default function UserForm({
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<User>({ defaultValues });
 
   //form submission
@@ -40,7 +42,12 @@ export default function UserForm({
     // delegate to react-hook-form handler
     return handleSubmit(onSubmit)(e);
   };
-
+  // 👇 this ensures form updates when defaultValues prop changes
+  useEffect(() => {
+    if (defaultValues) {
+      reset(defaultValues);
+    }
+  }, [defaultValues, reset]);
   return (
     <>
       <div>
@@ -157,11 +164,13 @@ export default function UserForm({
             )}
           </div>
         </div>
-        <div className="text-center my-2 p-2">
-          <button className="btn btn-warning w-50 p-2 text-white">
-            {submitLabel}
-          </button>
-        </div>
+        {submitLabel && (
+          <div className="text-center my-2 p-2">
+            <button className="btn btn-warning w-50 p-2 text-white">
+              {submitLabel}
+            </button>
+          </div>
+        )}
       </form>
     </>
   );

@@ -4,6 +4,8 @@ export interface User {
   id: number;
   firstName: string;
   email: string;
+  lastName: string;
+  image: string;
 }
 interface AuthContextType {
   userData: User | null;
@@ -21,6 +23,7 @@ export default function AuthContextProvider({
     const encodedToken = localStorage.getItem("userToken");
     if (encodedToken) {
       const decodedToken = jwtDecode<User>(encodedToken);
+
       setuserData(decodedToken);
     }
   };
