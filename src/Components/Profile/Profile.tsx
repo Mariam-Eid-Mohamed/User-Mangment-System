@@ -12,7 +12,7 @@ export default function Profile() {
           Authorization: `Bearer ${token}`, // ✅ send token with request
         },
       });
-      console.log(response?.data);
+
       setuserData(response?.data);
     } catch (error) {
       console.log(error);
