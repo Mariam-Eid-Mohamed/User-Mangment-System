@@ -37,3 +37,9 @@ input:-webkit-autofill {
   color: white; /* so text is visible on the image */
   z-index: 2; /* ensures text stays on top */
 }
+.sidebarContainer {
+  position: sticky;
+  top: 0;
+  align-self: flex-start; 
+  height: 100vh;/
+}

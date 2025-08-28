@@ -25,8 +25,8 @@ export default function SideBar() {
     // }
   };
   return (
-    <div className="sidebarContainer vh-100">
-      <Sidebar collapsed={collapsed} className="vh-100">
+    <div className="sidebarContainer  h-100">
+      <Sidebar collapsed={collapsed} className="h-100">
         {collapsed ? (
           <FaArrowCircleLeft
             size={25}

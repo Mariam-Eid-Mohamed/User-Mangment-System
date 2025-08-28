@@ -8,6 +8,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import Loading from "../Loading/Loading";
 interface User {
   id: number;
   image: string;
@@ -19,6 +20,7 @@ interface User {
 }
 export default function UsersList() {
   const [users, setUsers] = useState<User[]>([]);
+  const [loading, setloading] = useState(true);
 
   const getusers = async () => {
     try {
@@ -27,6 +29,8 @@ export default function UsersList() {
       console.log(response?.data?.users);
     } catch (error) {
       console.log(error);
+    } finally {
+      setloading(false);
     }
   };
 
@@ -61,9 +65,12 @@ export default function UsersList() {
     navigate("/dashboard/add-user");
   };
 
+  if (loading) {
+    return <Loading />;
+  }
   return (
     <>
-      <div className="d-flex justify-content-between mx-4">
+      <div className="d-flex justify-content-between mx-4 p-2">
         <h3>Users List</h3>
         <button onClick={moveToAddUser} className="btn btn-warning text-white">
           Add New User
