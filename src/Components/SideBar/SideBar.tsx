@@ -76,7 +76,9 @@ export default function SideBar() {
           >
             Profile
           </MenuItem>
-          <MenuItem icon={<CiLogout />}>Logout</MenuItem>
+          <MenuItem icon={<CiLogout />} component={<Link to="/logout" />}>
+            Logout
+          </MenuItem>
         </Menu>
       </Sidebar>
     </div>

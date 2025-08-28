@@ -10,6 +10,7 @@ export interface User {
 interface AuthContextType {
   userData: User | null;
   saveUserData: () => void;
+  logout: () => void;
 }
 export const AuthContext = createContext<AuthContextType | null>(null);
 export interface AuthContextProviderProps {
@@ -18,7 +19,12 @@ export interface AuthContextProviderProps {
 export default function AuthContextProvider({
   children,
 }: AuthContextProviderProps) {
+  const logout = () => {
+    localStorage.removeItem("userToken");
+    setuserData(null);
+  };
   const [userData, setuserData] = useState<User | null>(null);
+
   const saveUserData = () => {
     const encodedToken = localStorage.getItem("userToken");
     if (encodedToken) {
@@ -27,6 +33,7 @@ export default function AuthContextProvider({
       setuserData(decodedToken);
     }
   };
+
   //refresh so that every rerender the user ob ject still be in userData
   useEffect(() => {
     if (localStorage.getItem("userToken")) {
@@ -34,7 +41,7 @@ export default function AuthContextProvider({
     }
   }, []);
   return (
-    <AuthContext.Provider value={{ saveUserData, userData }}>
+    <AuthContext.Provider value={{ saveUserData, userData, logout }}>
       {children}
     </AuthContext.Provider>
   );

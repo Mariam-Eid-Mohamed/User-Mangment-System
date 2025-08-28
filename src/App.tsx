@@ -10,6 +10,7 @@ import UsersList from "./Components/UsersList/UsersList";
 import AddUser from "./Components/AddUser/AddUser";
 import { ToastContainer } from "react-toastify";
 import UpdateUser from "./Components/UpdateUser/UpdateUser";
+import LogOut from "./Components/LogOut/LogOut";
 function App() {
   const routes = createBrowserRouter([
     {
@@ -24,6 +25,10 @@ function App() {
         {
           path: "login",
           element: <Login />,
+        },
+        {
+          path: "logout",
+          element: <LogOut />,
         },
       ],
     },
