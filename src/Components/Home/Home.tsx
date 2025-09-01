@@ -16,10 +16,8 @@ export default function Home() {
               <div className="home-content position-absolute top-0 start-0 w-100 h-100 d-flex flex-column justify-content-center align-items-start p-4">
                 <h2>User Mangment System</h2>
                 <p>
-                  The User Management System UMS allows administrators to manage
-                  users effectively by adding, deleting, and updating accounts,
-                  while assigning roles and permissions to ensure secure access
-                  and streamlined system control.
+                  UMS allows administrators to manage users effectively by
+                  adding, deleting, and updating accounts, while assigning roles
                 </p>
               </div>
             </div>
